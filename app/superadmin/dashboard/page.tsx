@@ -1,24 +1,27 @@
 "use client"
 
-import { useEffect } from "react"
+import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import { EmployeeEvaluationDashboard } from "./components/employee-evaluation-dashboard"
 
 export default function SuperAdminDashboard() {
   const router = useRouter()
+  const [token, setToken] = useState("")
 
   useEffect(() => {
-    const token = localStorage.getItem("superadmin_token")
-    if (!token) {
+    const storedToken = localStorage.getItem("superadmin_token")
+    if (!storedToken) {
       router.push("/auth/superadmin-login")
       return
     }
 
+    setToken(storedToken)
+
     // Verify token with backend
     const verifyToken = async () => {
       try {
-        await axios.post("/api/superadmin/verify", { token })
+        await axios.post("/api/superadmin/verify", { token: storedToken })
       } catch {
         localStorage.removeItem("superadmin_token")
         router.push("/auth/superadmin-login")
@@ -27,8 +30,6 @@ export default function SuperAdminDashboard() {
 
     verifyToken()
   }, [router])
-
-  const token = localStorage.getItem("superadmin_token") || ""
 
   return (
     <div className="container mx-auto py-8">
