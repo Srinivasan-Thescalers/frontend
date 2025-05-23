@@ -28,11 +28,23 @@ export default function TasksPage() {
   const partnerOptions = ["NEXTPOINT", "PEI", "Brevan Howard", "Mediolanum", "Seven West Media"];
   const positionOptions = ["BHDB", "BHGT", "NESD", "PEDA", "PEML", "PESC", "BHAI", "BHBO", "BHQF", "BHSB", "BHSH", "BHSP","MEDS", "MEOS","NEMR", "NESF", "PEDS", "PELM", "PEMQ", "PEQT", "PESB", "PESD", "PESS", "PEWD", "SWDE"];
 
+  const positionMapping: Record<string, string> = {
+    NEXTPOINT: "NE",
+    PEI: "PE",
+    "Brevan Howard": "BH",
+    Mediolanum: "ME",
+    "Seven West Media": "SW",
+  };
+
   const [partnerName, setPartnerName] = useState("");
   const [position, setPosition] = useState("");
   const [callsShadowed, setCallsShadowed] = useState(0);
   const [comments, setComments] = useState("");
   const [isSubmitting, setIsSubmitting] = useState(false);
+
+  const filteredPositionOptions = positionOptions.filter((option) =>
+    partnerName ? option.startsWith(positionMapping[partnerName]) : true
+  );
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -117,7 +129,7 @@ export default function TasksPage() {
                       <SelectValue placeholder="Select position" />
                     </SelectTrigger>
                     <SelectContent>
-                      {positionOptions.map((option) => (
+                      {filteredPositionOptions.map((option) => (
                         <SelectItem key={option} value={option}>
                           {option}
                         </SelectItem>
