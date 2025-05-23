@@ -25,8 +25,8 @@ export default function TasksPage() {
   }, [searchParams]);
 
   // Dropdown options (replace with your actual data if needed)
-  const partnerOptions = ["NEXTPOINT", "PEI", "BRAHEN HORWARD"];
-  const positionOptions = ["Frontend", "Tester", "Backend", "Fullstack", "DevOps", "ML Engineer"];
+  const partnerOptions = ["NEXTPOINT", "PEI", "Brevan Howard", "Mediolanum", "Seven West Media"];
+  const positionOptions = ["BHDB", "BHGT", "NESD", "PEDA", "PEML", "PESC", "BHAI", "BHBO", "BHQF", "BHSB", "BHSH", "BHSP","MEDS", "MEOS","NEMR", "NESF", "PEDS", "PELM", "PEMQ", "PEQT", "PESB", "PESD", "PESS", "PEWD", "SWDE"];
 
   const [partnerName, setPartnerName] = useState("");
   const [position, setPosition] = useState("");
