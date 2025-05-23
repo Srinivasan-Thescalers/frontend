@@ -8,11 +8,9 @@ import { CheckCircle, PhoneCall, Star } from "lucide-react";
 import { DashboardChart } from "@/components/dashboard-chart";
 
 interface Feedback {
-  marks: number | null;
-  rating: number | null;
   feedback: string | null;
-  technology: string;
   position: string;
+  partnerName: string;
 }
 
 export default function DashboardPage() {
@@ -62,13 +60,14 @@ export default function DashboardPage() {
       const tasks = response.data;
 
       if (Array.isArray(tasks)) {
-        const feedbackData = tasks.map((task) => ({
-          marks: task.marks || null,
-          rating: task.rating || null,
-          feedback: task.feedback || null,
-          technology: task.technology || "N/A",
-          position: task.position || "N/A",
-        }));
+        const feedbackData = tasks
+          .map((task) => ({
+            feedback: task.feedback || null,
+            position: task.position || "N/A",
+            partnerName: task.partnerName || "N/A",
+          }))
+          .filter((feedback) => feedback.feedback && feedback.feedback !== "N/A"); // Filter out empty or "N/A" feedback
+
         setFeedbackList(feedbackData);
       } else {
         console.error("Expected an array of tasks, but received:", tasks);
@@ -96,16 +95,6 @@ export default function DashboardPage() {
             <p className="text-xs text-muted-foreground">Dynamic data</p>
           </CardContent>
         </Card>
-       {/* <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average Marks</CardTitle>
-            <CheckCircle className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div  className="text-2xl font-bold">{metrics.averageMarks}</div>
-            <p className="text-xs text-muted-foreground">Dynamic data</p>
-          </CardContent>
-        </Card> */}
         <Card>
           <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
             <CardTitle className="text-sm font-medium">Total Calls</CardTitle>
@@ -116,23 +105,12 @@ export default function DashboardPage() {
             <p className="text-xs text-muted-foreground">Dynamic data</p>
           </CardContent>
         </Card>
-        {/* <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Average Rating</CardTitle>
-            <Star className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{metrics.averageRating}</div>
-            <p className="text-xs text-muted-foreground">Dynamic data</p>
-          </CardContent>
-        </Card> */}
       </div>
 
       <Tabs defaultValue="overview" className="space-y-4">
         <TabsList>
           <TabsTrigger value="overview">Overview</TabsTrigger>
           <TabsTrigger value="tasks">Tasks</TabsTrigger>
-          {/* <TabsTrigger value="feedback">Feedback</TabsTrigger> */}
         </TabsList>
         <TabsContent value="overview" className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-7">
@@ -154,16 +132,10 @@ export default function DashboardPage() {
                   {feedbackList.map((feedback, index) => (
                     <div key={index} className="border-b pb-3 last:pb-0 last:border-0">
                       <p className="text-sm">
-                        <span className="font-medium">Technology:</span> <b>{feedback.technology}</b>
-                      </p>
-                      <p className="text-sm">
                         <span className="font-medium">Position:</span> <b>{feedback.position}</b>
                       </p>
                       <p className="text-sm">
-                        <span className="font-medium">Marks:</span> {feedback.marks ?? "N/A"}
-                      </p>
-                      <p className="text-sm">
-                        <span className="font-medium">Rating:</span> {feedback.rating ?? "N/A"}
+                        <span className="font-medium">Partner Name:</span> <b>{feedback.partnerName}</b>
                       </p>
                       <p className="text-sm">
                         <span className="font-medium">Feedback:</span> {feedback.feedback ?? "N/A"}
