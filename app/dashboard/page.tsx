@@ -92,7 +92,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{metrics.totalTasks}</div>
-            <p className="text-xs text-muted-foreground">Dynamic data</p>
+            <p className="text-xs text-muted-foreground"></p>
           </CardContent>
         </Card>
         <Card>
@@ -102,7 +102,7 @@ export default function DashboardPage() {
           </CardHeader>
           <CardContent>
             <div className="text-2xl font-bold">{metrics.totalCalls}</div>
-            <p className="text-xs text-muted-foreground">Dynamic data</p>
+            <p className="text-xs text-muted-foreground"></p>
           </CardContent>
         </Card>
       </div>
