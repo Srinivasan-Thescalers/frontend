@@ -139,12 +139,12 @@ export function EmployeeEvaluationDashboard({ token }: EmployeeEvaluationDashboa
       <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
         <div className="relative w-full sm:w-72">
           <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          <Input
+          {/* <Input
             placeholder="Search employees..."
             className="pl-8"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-          />
+          /> */}
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
@@ -264,7 +264,7 @@ export function EmployeeEvaluationDashboard({ token }: EmployeeEvaluationDashboa
           )}
         </CardContent>
       </Card>
-
+{/* 
       {selectedEmployee && (
         <EmployeeEvaluationModal
           employee={selectedEmployee}
@@ -272,7 +272,7 @@ export function EmployeeEvaluationDashboard({ token }: EmployeeEvaluationDashboa
           onClose={closeModal}
           token={token} // Pass the token prop here
         />
-      )}
+      )} */}
     </div>
   )
 }

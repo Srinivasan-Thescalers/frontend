@@ -58,7 +58,7 @@ export function DashboardChart() {
           <YAxis />
           <Tooltip />
           <Legend />
-          <Bar dataKey="tasks" fill="#8884d8" name="Tasks Completed" />
+          <Bar dataKey="tasks" fill="#8884d8" name="Total Tasks" />
           <Bar dataKey="calls" fill="#82ca9d" name="Calls Made" />
         </BarChart>
       </ResponsiveContainer>
