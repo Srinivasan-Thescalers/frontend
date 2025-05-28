@@ -19,7 +19,7 @@ const LiveNews: React.FC = () => {
     const fetchNews = async () => {
       try {
         const response = await fetch(
-          "https://newsdata.io/api/1/latest?apikey=pub_184f65cf0273409eab70530ac415e817&q=technology"
+          "https://newsdata.io/api/1/latest?apikey=pub_184f65cf0273409eab70530ac415e817&q=computer%20%2C%20mobile%20phones%20%2C%20Technology%2C%20AI%2C%20Blockchain%2C%20Artificial%20Intelligence&country=au,ca,cn,in,us&timezone=Asia/Kolkata"
         );
         const data = await response.json();
         setNewsData(data.results || []);
