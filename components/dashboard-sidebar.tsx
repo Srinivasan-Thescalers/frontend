@@ -41,11 +41,11 @@ export function DashboardSidebar() {
       href: "/dashboard/questions",
       icon: Paperclip,
     },
-    {
-      name: "Tech News",
-      href: "/dashboard/news",
-      icon: Newspaper,
-    },
+    // {
+    //   name: "Tech News",
+    //   href: "/dashboard/news",
+    //   icon: Newspaper,
+    // },
     {
       name: "Login as Super Admin",
       href: "/auth/superadmin-login",
