@@ -34,96 +34,47 @@ const LiveNews: React.FC = () => {
   }, []);
 
   if (loading) {
-    return <p style={styles.loading}>Loading news...</p>;
+    return <p className="text-center text-gray-600 text-lg">Loading news...</p>;
   }
 
   if (error) {
-    return <p style={styles.error}>{error}</p>;
+    return <p className="text-center text-red-500 text-lg">{error}</p>;
   }
 
   return (
-    <div style={styles.container}>
-      <h1 style={styles.header}>Live Technology News</h1>
-      <div style={styles.grid}>
+    <div className="bg-gray-100 min-h-screen p-6">
+      <h1 className="text-3xl font-bold text-center text-gray-800 mb-6">
+        Live Technology News
+      </h1>
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
         {newsData.map((article) => (
-          <div key={article.article_id} style={styles.card}>
+          <div
+            key={article.article_id}
+            className="bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300 flex flex-col"
+          >
             {article.image_url && (
               <img
                 src={article.image_url}
                 alt={article.title}
-                style={styles.image}
+                className="w-full h-48 object-cover"
               />
             )}
-            <h2 style={styles.title}>{article.title}</h2>
-            <p style={styles.description}>{article.description}</p>
-            <p style={styles.pubDate}>
-              Published on: {new Date(article.pubDate).toLocaleDateString()}
-            </p>
+            <div className="p-4 flex flex-col flex-grow">
+              <h2 className="text-lg font-semibold text-gray-800 mb-2">
+                {article.title}
+              </h2>
+              <p className="text-sm text-gray-600 mb-4 flex-grow">
+                {article.description || "No description available."}
+              </p>
+              <p className="text-xs text-gray-500">
+                Published on: {new Date(article.pubDate).toLocaleDateString()}
+              </p>
+            </div>
           </div>
         ))}
       </div>
     </div>
   );
-};
-
-const styles: Record<string, React.CSSProperties> = {
-  container: {
-    padding: "20px",
-    fontFamily: "'Arial', sans-serif",
-    backgroundColor: "#f4f4f9",
-    minHeight: "100vh",
-  },
-  header: {
-    fontSize: "28px",
-    fontWeight: "bold",
-    marginBottom: "20px",
-    textAlign: "center",
-    color: "#333",
-  },
-  grid: {
-    display: "grid",
-    gridTemplateColumns: "repeat(auto-fit, minmax(300px, 1fr))",
-    gap: "20px",
-  },
-  card: {
-    border: "1px solid #ddd",
-    borderRadius: "8px",
-    backgroundColor: "#fff",
-    boxShadow: "0 4px 6px rgba(0, 0, 0, 0.1)",
-    padding: "16px",
-    transition: "transform 0.3s, box-shadow 0.3s",
-    cursor: "pointer",
-  },
-  image: {
-    width: "100%",
-    borderRadius: "8px",
-    marginBottom: "10px",
-  },
-  title: {
-    fontSize: "18px",
-    fontWeight: "bold",
-    marginBottom: "10px",
-    color: "#333",
-  },
-  description: {
-    fontSize: "14px",
-    color: "#555",
-    marginBottom: "10px",
-  },
-  pubDate: {
-    fontSize: "12px",
-    color: "#999",
-  },
-  loading: {
-    textAlign: "center",
-    fontSize: "16px",
-    color: "#555",
-  },
-  error: {
-    textAlign: "center",
-    fontSize: "16px",
-    color: "red",
-  },
 };
 
 export default LiveNews;
