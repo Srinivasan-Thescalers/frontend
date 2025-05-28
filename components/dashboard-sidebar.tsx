@@ -8,7 +8,7 @@ import { ScrollArea } from "@/components/ui/scroll-area"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { useSidebar } from "@/components/sidebar-provider"
-import { BarChart3, LayoutDashboard, LogOut, Menu, PhoneCall, Settings, CheckSquare, Paperclip } from "lucide-react"
+import { BarChart3, LayoutDashboard, LogOut, Menu, PhoneCall, Settings, CheckSquare, Paperclip, Newspaper } from "lucide-react"
 
 export function DashboardSidebar() {
   const pathname = usePathname()
@@ -40,6 +40,11 @@ export function DashboardSidebar() {
       name: "Questions",
       href: "/dashboard/questions",
       icon: Paperclip,
+    },
+    {
+      name: "Tech News",
+      href: "/dashboard/news",
+      icon: Newspaper,
     },
     {
       name: "Login as Super Admin",
