@@ -134,8 +134,7 @@ export function TaskList() {
 
   return (
     <div className="h-screen bg-gradient-to-br from-slate-50 to-slate-100 p-6">
-    <div className="mb-6">
-      <h1 className="text-3xl font-bold text-slate-900 mb-2">My Shadowing Tasks</h1>
+    {/* <div className="mb-6">
       <p className="text-slate-600">Track your call shadowing progress and observations</p>
       <div className="flex items-center gap-4 mt-4">
         <Badge variant="outline" className="bg-white">
@@ -145,7 +144,7 @@ export function TaskList() {
           Total Calls: {tasks.reduce((sum, task) => sum + task.callsShadowed, 0)}
         </Badge>
       </div>
-    </div>
+    </div> */}
 
     <div className="h-[calc(100vh-200px)] overflow-y-auto scrollbar-thin scrollbar-thumb-slate-300 scrollbar-track-slate-100">
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 2xl:grid-cols-4 gap-6 pb-6">
@@ -197,7 +196,7 @@ export function TaskList() {
                   </div>
                   <div className="flex-1 min-w-0">
                     <p className="font-medium text-slate-700 mb-1">Comments</p>
-                    <p className="text-slate-600 text-xs leading-relaxed line-clamp-4 bg-slate-50 p-3 rounded-md">
+                    <p className="text-slate-600 text-sm leading-relaxed line-clamp-4 bg-slate-50 p-4 rounded-md">
                       {task.comments || "No comments available"}
                     </p>
                   </div>
