@@ -195,9 +195,9 @@ export function TaskList() {
                     <MessageSquare className="w-4 h-4" />
                   </div>
                   <div className="flex-1 min-w-0">
-                    <p className="font-medium text-slate-700 mb-1">Comments</p>
+                    <p className="font-medium text-slate-700 mb-1">Description</p>
                     <p className="text-slate-600 text-sm leading-relaxed line-clamp-4 bg-slate-50 p-4 rounded-md">
-                      {task.comments || "No comments available"}
+                      {task.comments || "No description available"}
                     </p>
                   </div>
                 </div>
