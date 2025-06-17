@@ -206,7 +206,7 @@ int main() {
       </div>
 
       <footer className="p-2 bg-gray-800 border-t border-gray-700 text-xs text-gray-400 text-center">
-        Multi-Language IDE © {new Date().getFullYear()}
+        The Scalers-IDE © {new Date().getFullYear()}
       </footer>
     </main>
   )
