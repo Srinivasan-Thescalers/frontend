@@ -26,7 +26,7 @@ export default function TasksPage() {
 
   // Dropdown options (replace with your actual data if needed)
   const partnerOptions = ["NEXTPOINT", "PEI", "Brevan Howard", "Mediolanum", "Seven West Media", "JHT"];
-  const positionOptions = ["BHDB", "BHGT", "NESD", "PEDA", "PEML", "PESC", "BHAI", "BHBO", "BHQF", "BHSB", "BHSH", "BHSP","MEDS", "MEOS","NEMR", "NESF", "PEDS", "PELM", "PEMQ", "PEQT", "PESB", "PESD", "PESS", "PEWD", "SWDE","JHSE"];
+  const positionOptions = ["BHDB", "BHGT", "NESD","NEMD", "PEDA", "PEML", "PESC", "BHAI", "BHBO", "BHQF", "BHSB", "BHSH", "BHSP","MEDS", "MEOS","NEMR", "NESF", "PEDS", "PELM", "PEMQ", "PEQT", "PESB", "PESD", "PESS", "PEWD", "SWDE","JHSE"];
 
   const positionMapping: Record<string, string> = {
     NEXTPOINT: "NE",
