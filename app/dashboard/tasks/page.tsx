@@ -25,8 +25,8 @@ export default function TasksPage() {
   }, [searchParams]);
 
   // Dropdown options (replace with your actual data if needed)
-  const partnerOptions = ["NEXTPOINT", "PEI", "Brevan Howard", "Mediolanum", "Seven West Media", "JHT"];
-  const positionOptions = ["BHDB", "BHGT", "NESD","NEMD", "PEDA", "PEML", "PESC", "BHAI", "BHBO", "BHQF", "BHSB", "BHSH", "BHSP","MEDS", "MEOS","NEMR", "NESF", "PEDS", "PELM", "PEMQ", "PEQT", "PESB", "PESD", "PESS", "PEWD", "SWDE","JHSE"];
+  const partnerOptions = ["NEXTPOINT", "PEI", "Brevan Howard", "Mediolanum", "Seven West Media", "JHT", "MYCARGO GATE"];
+  const positionOptions = ["MCSJ", "MCMJ" ,"BHDB", "BHGT", "NESD","NEMD", "PEDA", "PEML", "PESC", "BHAI", "BHBO", "BHQF", "BHSB", "BHSH", "BHSP","MEDS", "MEOS","NEMR", "NESF", "PEDS", "PELM", "PEMQ", "PEQT", "PESB", "PESD", "PESS", "PEWD", "SWDE","JHSE"];
 
   const positionMapping: Record<string, string> = {
     NEXTPOINT: "NE",
@@ -35,6 +35,7 @@ export default function TasksPage() {
     Mediolanum: "ME",
     "Seven West Media": "SW",
     JHT: "JH",
+    "MYCARGO GATE": "MC",
   };
 
   const [partnerName, setPartnerName] = useState("");
