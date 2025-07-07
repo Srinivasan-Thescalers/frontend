@@ -13,6 +13,7 @@ import { Table, TableBody, TableCell, TableHead, TableHeader, TableRow } from "@
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { AlertCircle, CheckCircle2, Loader2 } from "lucide-react";
 import { Checkbox } from "@/components/ui/checkbox";
+import { SuperAdminHeader } from "@/app/superadmin/dashboard/components/header";
 
 export default function EmployeeEvaluationPage() {
   const router = useRouter();
@@ -252,113 +253,96 @@ export default function EmployeeEvaluationPage() {
   const aggregatedResults = aggregateResults(filteredResults);
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="bg-white border-b border-slate-200">
-        <div className="container mx-auto px-4 py-4 flex items-center justify-between">
-          <div className="flex items-center space-x-2">
-            <h1 className="text-xl font-semibold text-slate-800">Performance Management</h1>
+    <>
+      <SuperAdminHeader />
+      <div className="min-h-screen bg-gradient-to-b from-white to-slate-100">
+        <main className="container mx-auto px-6 py-10">
+          <div className="flex flex-col lg:flex-row justify-between items-center mb-8">
+            <div className="text-center lg:text-left">
+              <h1 className="text-3xl font-extrabold">Employee Evaluation</h1>
+              <p className="text-sm mt-2">Submit and review employee performance evaluations</p>
+            </div>
+            <div className="flex space-x-4 mt-4 lg:mt-0">
+              <Button variant="outline" className="bg-gradient-to-r from-purple-600 to-blue-600 text-white shadow-md hover:shadow-lg" onClick={handleDownloadExcel}>
+                Download Excel
+              </Button>
+              <Button variant="outline" className="bg-gradient-to-r from-pink-500 to-purple-500 text-white shadow-md hover:shadow-lg" onClick={handleDownloadPDF}>
+                Download PDF
+              </Button>
+            </div>
           </div>
-          <div className="text-sm text-slate-500">
-            {username && <span className="font-medium">{username}</span>}
-          </div>
-        </div>
-      </header>
-
-  
-      <main className="container mx-auto px-4 py-8">
-        <div className="mb-6 flex justify-between items-center">
-          <div>
-            <h1 className="text-2xl font-bold text-slate-800">Employee Evaluation</h1>
-            <p className="text-slate-500 mt-1">Submit and review employee performance evaluations</p>
-          </div>
-          <div className="flex space-x-2">
-            <Button variant="outline" onClick={handleDownloadExcel}>
-              Download Excel
-            </Button>
-            <Button variant="outline" onClick={handleDownloadPDF}>
-              Download PDF
-            </Button>
-          </div>
-        </div>
-
-
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-8">
-          {/* Table Section */}
-          <div className="lg:col-span-9">
-            <Card>
-              <CardHeader className="pb-3">
-                <div className="flex items-center justify-between">
-                  <div>
-                    <CardTitle>Evaluation Records</CardTitle>
-                    <CardDescription>View all submitted performance evaluations</CardDescription>
+          <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+            <div className="lg:col-span-9">
+              <Card className="shadow-lg border border-gray-200 rounded-lg">
+                <CardHeader className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-t-lg p-4">
+                  <div className="flex justify-between items-center">
+                    <div>
+                      <CardTitle className="text-lg font-semibold">Evaluation Records</CardTitle>
+                      <CardDescription className="text-sm">View all submitted performance evaluations</CardDescription>
+                    </div>
+                    <Button
+                      variant="outline"
+                      size="sm"
+                      onClick={handleGet}
+                      disabled={loading}
+                      className="text-xs bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow hover:shadow-md"
+                    >
+                      {loading ? <Loader2 className="h-4 w-4 animate-spin" /> : "Refresh"}
+                    </Button>
                   </div>
-                  <Button
-                    variant="outline"
-                    size="sm"
-                    onClick={handleGet}
-                    disabled={loading}
-                    className="text-xs"
-                  >
-                    {loading ? <Loader2 className="h-3 w-3 animate-spin" /> : "Refresh"}
-                  </Button>
-                </div>
-              </CardHeader>
-              <CardContent className="p-0">
-                <div className="overflow-x-auto">
-                  <Table>
-                    <TableHeader className="bg-slate-50">
-                      <TableRow>
-                        <TableHead className="font-medium">Partner</TableHead>
-                        <TableHead className="font-medium">Position</TableHead>
-                        <TableHead className="font-medium text-right">Average Percentage</TableHead>
-                        <TableHead className="font-medium text-right">Average Rating</TableHead>
-                        <TableHead className="font-medium text-right">Status</TableHead>
-
-                      </TableRow>
-                    </TableHeader>
-                    <TableBody>
-                      {loading && !aggregatedResults.length ? (
+                </CardHeader>
+                <CardContent className="p-4">
+                  <div className="overflow-x-auto">
+                    <Table className="min-w-full">
+                      <TableHeader className="bg-gray-100">
                         <TableRow>
-                          <TableCell colSpan={4} className="h-24 text-center">
-                            <Loader2 className="h-5 w-5 animate-spin mx-auto" />
-                            <span className="text-sm text-slate-500 mt-2 block">Loading evaluation data...</span>
-                          </TableCell>
+                          <TableHead className="font-medium">Partner</TableHead>
+                          <TableHead className="font-medium">Position</TableHead>
+                          <TableHead className="font-medium text-right">Average Percentage</TableHead>
+                          <TableHead className="font-medium text-right">Average Rating</TableHead>
+                          <TableHead className="font-medium text-right">Status</TableHead>
                         </TableRow>
-                      ) : aggregatedResults.length === 0 ? (
-                        <TableRow>
-                          <TableCell colSpan={4} className="h-24 text-center">
-                            <p className="text-sm text-slate-500">No evaluations found.</p>
-                            <p className="text-xs text-slate-400 mt-1">Submit an evaluation to see it here.</p>
-                          </TableCell>
-                        </TableRow>
-                      ) : (
-                        aggregatedResults.map((item, index) => (
-                          <TableRow key={index} className="hover:bg-slate-50">
-                            <TableCell className="font-medium">{item.partnerName}</TableCell>
-                            <TableCell>{item.position}</TableCell>
-                            <TableCell className="text-right">{item.averagePercentage}%</TableCell>
-                            <TableCell className="text-right">{item.averageRating}</TableCell>
-                            <TableCell className="text-right">{item.status}</TableCell>
-
+                      </TableHeader>
+                      <TableBody>
+                        {loading && !aggregatedResults.length ? (
+                          <TableRow>
+                            <TableCell colSpan={5} className="h-24 text-center">
+                              <Loader2 className="h-6 w-6 animate-spin mx-auto" />
+                              <span className="text-sm mt-2 block">Loading evaluation data...</span>
+                            </TableCell>
                           </TableRow>
-                        ))
-                      )}
-                    </TableBody>
-                  </Table>
-                </div>
-              </CardContent>
-            </Card>
+                        ) : aggregatedResults.length === 0 ? (
+                          <TableRow>
+                            <TableCell colSpan={5} className="h-24 text-center">
+                              <p className="text-sm">No evaluations found.</p>
+                              <p className="text-xs mt-1">Submit an evaluation to see it here.</p>
+                            </TableCell>
+                          </TableRow>
+                        ) : (
+                          aggregatedResults.map((item, index) => (
+                            <TableRow key={index} className="hover:bg-gray-50">
+                              <TableCell>{item.partnerName}</TableCell>
+                              <TableCell>{item.position}</TableCell>
+                              <TableCell className="text-right">{item.averagePercentage}%</TableCell>
+                              <TableCell className="text-right">{item.averageRating}</TableCell>
+                              <TableCell className="text-right">{item.status}</TableCell>
+                            </TableRow>
+                          ))
+                        )}
+                      </TableBody>
+                    </Table>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
           </div>
-        </div>
-      </main>
-
-      <footer className="mt-auto border-t border-slate-200 py-4">
-        <div className="container mx-auto px-4">
-          <div className="text-center text-xs text-slate-500">
-            © {new Date().getFullYear()}  The Scalers. All rights reserved.
+        </main>
+        <footer className="bg-gray-100 py-4">
+          <div className="container mx-auto text-center text-xs">
+            © {new Date().getFullYear()} The Scalers. All rights reserved.
           </div>
-        </div>
-      </footer>
-    </div>
+        </footer>
+      </div>
+    </>
   );
 }

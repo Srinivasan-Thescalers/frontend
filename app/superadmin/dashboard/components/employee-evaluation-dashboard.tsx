@@ -135,28 +135,28 @@ export function EmployeeEvaluationDashboard({ token }: EmployeeEvaluationDashboa
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-col sm:flex-row gap-4 justify-between items-start sm:items-center">
-        <div className="relative w-full sm:w-72">
-          <Search className="absolute left-2 top-2.5 h-4 w-4 text-muted-foreground" />
-          {/* <Input
+    <div className="space-y-6 bg-gradient-to-b from-white to-slate-100 min-h-screen p-8">
+      <div className="flex flex-col sm:flex-row gap-6 justify-between items-start sm:items-center">
+        <div className="relative w-full sm:w-80">
+          <Search className="absolute left-3 top-3 h-5 w-5 text-gray-400" />
+          <Input
             placeholder="Search employees..."
-            className="pl-8"
+            className="pl-10 py-2 bg-white border border-gray-300 rounded-lg shadow-sm focus:ring-2 focus:ring-purple-500 focus:border-purple-500"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
-          /> */}
+          />
         </div>
         <DropdownMenu>
           <DropdownMenuTrigger asChild>
-            <Button variant="outline" className="w-full sm:w-auto">
-              <UserCog className="mr-2 h-4 w-4" />
+            <Button variant="outline" className="w-full sm:w-auto bg-gradient-to-r from-purple-500 to-blue-500 text-white shadow-md hover:shadow-lg">
+              <UserCog className="mr-2 h-5 w-5" />
               Select Employee
-              <ChevronDown className="ml-2 h-4 w-4" />
+              <ChevronDown className="ml-2 h-5 w-5" />
             </Button>
           </DropdownMenuTrigger>
-          <DropdownMenuContent align="end" className="w-[250px] max-h-[400px] overflow-y-auto">
+          <DropdownMenuContent align="end" className="w-[250px] max-h-[400px] overflow-y-auto bg-white shadow-lg rounded-lg border border-gray-200">
             {distinctEmployees.map((employee) => (
-              <DropdownMenuItem key={employee._id} onClick={() => handleEvaluateEmployee(employee)}>
+              <DropdownMenuItem key={employee._id} onClick={() => handleEvaluateEmployee(employee)} className="hover:bg-gray-100">
                 {employee.username}
               </DropdownMenuItem>
             ))}
@@ -164,94 +164,49 @@ export function EmployeeEvaluationDashboard({ token }: EmployeeEvaluationDashboa
         </DropdownMenu>
       </div>
 
-      <Card>
-        <CardHeader>
-          <CardTitle>Employee Evaluations</CardTitle>
-          <CardDescription>Manage and review employee performance evaluations.</CardDescription>
+      <Card className="shadow-lg border border-gray-200 rounded-lg">
+        <CardHeader className="bg-gradient-to-r from-purple-50 to-blue-50 rounded-t-lg p-6">
+          <CardTitle className="text-xl font-semibold">Employee Evaluations</CardTitle>
+          <CardDescription className="text-sm">Manage and review employee performance evaluations.</CardDescription>
         </CardHeader>
-        <CardContent>
+        <CardContent className="p-6">
           {loading ? (
             <div className="flex justify-center items-center h-64">
-              <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-primary"></div>
+              <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-purple-500"></div>
             </div>
           ) : error ? (
             <div className="flex justify-center items-center h-64">
               <p className="text-red-500">{error}</p>
             </div>
           ) : (
-            <Table>
-              <TableHeader>
+            <Table className="min-w-full">
+              <TableHeader className="bg-gray-100">
                 <TableRow>
-                  <TableHead className="w-[200px]">
-                    <Button variant="ghost" className="p-0 font-medium flex items-center">
-                      Name
-                      <ArrowUpDown className="ml-2 h-4 w-4" />
-                    </Button>
-                  </TableHead>
-                  <TableHead>Email</TableHead>
-                  {/* <TableHead>Position</TableHead> */}
-                  {/* <TableHead>Technology</TableHead> */}
-                  {/* <TableHead className="text-right">Marks</TableHead>
-                  <TableHead className="text-right">Rating</TableHead> */}
-                  <TableHead className="text-right">Actions</TableHead>
+                  <TableHead className="w-[200px] font-medium">Name</TableHead>
+                  <TableHead className="font-medium">Email</TableHead>
+                  <TableHead className="text-right font-medium">Actions</TableHead>
                 </TableRow>
               </TableHeader>
               <TableBody>
                 {filteredEmployees.length === 0 ? (
                   <TableRow>
-                    <TableCell colSpan={7} className="text-center py-8">
+                    <TableCell colSpan={3} className="text-center py-8">
                       No employees found
                     </TableCell>
                   </TableRow>
                 ) : (
                   filteredEmployees.map((employee) => (
-                    <TableRow key={employee._id}>
+                    <TableRow key={employee._id} className="hover:bg-gray-50">
                       <TableCell className="font-medium">{employee.username}</TableCell>
                       <TableCell>{employee.email}</TableCell>
-                      {/* <TableCell>{employee.position}</TableCell> */}
-                      {/* <TableCell>{employee.technology}</TableCell> */}
-                      {/* <TableCell className="text-right">
-                        {employee.marks !== null ? (
-                          <span
-                            className={`font-medium ${
-                              employee.marks >= 85
-                                ? "text-green-600"
-                                : employee.marks >= 70
-                                ? "text-amber-600"
-                                : "text-red-600"
-                            }`}
-                          >
-                            {employee.marks}
-                          </span>
-                        ) : (
-                          <span className="text-muted-foreground">Not evaluated</span>
-                        )}
-                      </TableCell> */}
-                      {/* <TableCell className="text-right">
-                        {employee.rating !== null ? (
-                          <span
-                            className={`font-medium ${
-                              employee.rating >= 4
-                                ? "text-green-600"
-                                : employee.rating >= 3
-                                ? "text-amber-600"
-                                : "text-red-600"
-                            }`}
-                          >
-                            {employee.rating}/5
-                          </span>
-                        ) : (
-                          <span className="text-muted-foreground">Not rated</span>
-                        )}
-                      </TableCell> */}
                       <TableCell className="text-right">
-                        <div className="flex justify-end gap-2">
-                          <Button variant="outline" size="icon" onClick={() => handleViewEmployee(employee)}>
-                            <Eye className="h-4 w-4" />
+                        <div className="flex justify-end gap-3">
+                          <Button variant="outline" size="icon" onClick={() => handleViewEmployee(employee)} className="hover:bg-gray-100">
+                            <Eye className="h-5 w-5" />
                             <span className="sr-only">View</span>
                           </Button>
-                          <Button variant="default" size="icon" onClick={() => handleEvaluateEmployee(employee)}>
-                            <UserCog className="h-4 w-4" />
+                          <Button variant="default" size="icon" onClick={() => handleEvaluateEmployee(employee)} className="bg-gradient-to-r from-purple-500 to-blue-500 text-white hover:shadow-md">
+                            <UserCog className="h-5 w-5" />
                             <span className="sr-only">Evaluate</span>
                           </Button>
                         </div>
@@ -264,15 +219,6 @@ export function EmployeeEvaluationDashboard({ token }: EmployeeEvaluationDashboa
           )}
         </CardContent>
       </Card>
-{/* 
-      {selectedEmployee && (
-        <EmployeeEvaluationModal
-          employee={selectedEmployee}
-          isOpen={isModalOpen}
-          onClose={closeModal}
-          token={token} // Pass the token prop here
-        />
-      )} */}
     </div>
   )
 }

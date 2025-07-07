@@ -4,6 +4,7 @@ import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
 import axios from "axios"
 import { EmployeeEvaluationDashboard } from "./components/employee-evaluation-dashboard"
+import { SuperAdminHeader } from "./components/header"
 
 export default function SuperAdminDashboard() {
   const router = useRouter()
@@ -32,9 +33,11 @@ export default function SuperAdminDashboard() {
   }, [router])
 
   return (
+    <div className="min-h-screen bg-gray-50">
+    <SuperAdminHeader />
     <div className="container mx-auto py-8">
-      <h1 className="text-3xl font-bold mb-8">Hey, Admin Welcome back</h1>
       <EmployeeEvaluationDashboard token={token} />
     </div>
+  </div>
   )
 }
