@@ -69,25 +69,11 @@ export function SuperAdminHeader({ onLogout }: SuperAdminHeaderProps) {
                     MASTER
                   </Badge>
                 </div>
-                <p className="text-purple-200 text-sm font-medium">Employee Management System</p>
               </div>
             </div>
 
             {/* Quick Stats */}
-            <div className="hidden lg:flex items-center space-x-6 ml-8">
-              <div className="flex items-center space-x-2 text-purple-200">
-                <Users className="h-4 w-4" />
-                <span className="text-sm font-medium">6 Employees</span>
-              </div>
-              <div className="flex items-center space-x-2 text-purple-200">
-                <BarChart3 className="h-4 w-4" />
-                <span className="text-sm font-medium">75% Active</span>
-              </div>
-              <div className="flex items-center space-x-2 text-purple-200">
-                <Calendar className="h-4 w-4" />
-                <span className="text-sm font-medium">Today</span>
-              </div>
-            </div>
+          
           </div>
 
           {/* Center - Search */}
@@ -101,15 +87,26 @@ export function SuperAdminHeader({ onLogout }: SuperAdminHeaderProps) {
             </div>
           </div>
 
+          {/* New Routing Buttons */}
+          <div className="flex items-center space-x-4">
+            <Button 
+              onClick={() => router.push("/questions")} 
+              className="bg-gradient-to-r from-blue-500 to-purple-500 text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-transform duration-200"
+            >
+              Questions set 
+            </Button>
+            <Button 
+              onClick={() => router.push("/route2")} 
+              className="bg-gradient-to-r from-green-500 to-teal-500 text-white px-4 py-2 rounded-lg shadow-md hover:scale-105 transition-transform duration-200"
+            >
+              Route 2
+            </Button>
+          </div>
+
           {/* Right side - Actions and Profile */}
           <div className="flex items-center space-x-3">
             {/* Messages */}
-            <Button variant="ghost" size="icon" className="relative text-purple-200 hover:text-white hover:bg-white/10 transition-colors duration-200">
-              <MessageSquare className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 bg-gradient-to-r from-pink-500 to-red-500 rounded-full text-xs text-white flex items-center justify-center animate-pulse">
-                5
-              </span>
-            </Button>
+         
 
             {/* Notifications */}
             <Button variant="ghost" size="icon" className="relative text-purple-200 hover:text-white hover:bg-white/10 transition-colors duration-200">
@@ -138,7 +135,7 @@ export function SuperAdminHeader({ onLogout }: SuperAdminHeaderProps) {
                   </div>
                   <div className="hidden lg:block text-left">
                     <p className="text-sm font-semibold text-white">Super Admin</p>
-                    <p className="text-xs text-purple-300">bharath.s@thescalers.com</p>
+                    <p className="text-xs text-purple-300"></p>
                   </div>
                   <ChevronDown className="h-4 w-4 text-purple-300" />
                 </Button>
